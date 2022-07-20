@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "241443977784",
+    "project_id": "store-virtual-eb003",
+    "storage_bucket": "store-virtual-eb003.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241443977784:android:679555265440189a2b84cd",
+        "android_client_info": {
+          "package_name": "com.dugfers.app_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241443977784-kt7bfsjl7h4tlaer941popqo4ss46gl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4_Q3qpql_35u8MNB0gy8LEoVi0yn4fek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241443977784-kt7bfsjl7h4tlaer941popqo4ss46gl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
