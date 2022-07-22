@@ -58,7 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: const InputDecoration(hintText: "E-mail"),
                       keyboardType: TextInputType.emailAddress,
                       validator: (text) {
-                        if (text!.isEmpty || !text.contains('@')) {
+                        if (text!.isEmpty ||
+                            !text.contains('@') ||
+                            !text.contains('.')) {
                           return 'E-mail inválida!';
                         }
                         return null;
@@ -80,7 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          if (_emailController.text.isEmpty) {
+                          if (_emailController.text.isEmpty ||
+                              !_emailController.text.contains('@') ||
+                              !_emailController.text.contains('.')) {
                             _scaffoldKey.currentState?.showSnackBar(
                               const SnackBar(
                                 content:
@@ -112,13 +116,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: primaryColor),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {}
-
-                          model.SignIn(
-                              email: _emailController.text,
-                              pass: _passController.text,
-                              onSuccess: _onSuccess,
-                              onFail: _onFail);
+                          if (_formKey.currentState!.validate()) {
+                            model.SignIn(
+                                email: _emailController.text,
+                                pass: _passController.text,
+                                onSuccess: _onSuccess,
+                                onFail: _onFail);
+                          }
                         },
                         child: const Text(
                           'Entrar',

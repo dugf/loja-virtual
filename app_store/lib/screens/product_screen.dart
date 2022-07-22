@@ -1,4 +1,9 @@
+import 'package:app_store/datas/cart_product.dart';
 import 'package:app_store/datas/product_data.dart';
+import 'package:app_store/models/cart_model.dart';
+import 'package:app_store/models/user_model.dart';
+import 'package:app_store/screens/cart_screen.dart';
+import 'package:app_store/screens/login_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -141,10 +146,31 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColor),
-                    onPressed: size != null ? () {} : null,
-                    child: const Text(
-                      'Adicionar ao Carrinho',
-                      style: TextStyle(
+                    onPressed: size != null
+                        ? () {
+                            if (UserModel.of(context).isLoggedIn()!) {
+                              CartProduct cartProduct = CartProduct();
+
+                              cartProduct.size = size;
+                              cartProduct.quantity = 1;
+                              cartProduct.pid = data?.id;
+                              cartProduct.category = data?.category;
+
+                              CartModel.of(context).addCartItem(cartProduct);
+
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const CartScreen()));
+                            } else {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
+                            }
+                          }
+                        : null,
+                    child: Text(
+                      UserModel.of(context).isLoggedIn()!
+                          ? 'Adicionar ao Carrinho'
+                          : 'Entre para comprar',
+                      style: const TextStyle(
                         fontSize: 18.0,
                         color: Colors.white,
                       ),

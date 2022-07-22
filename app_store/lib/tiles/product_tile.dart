@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 
 class ProductTile extends StatelessWidget {
   final String? type;
-  final ProductData? data;
+  final ProductData? product;
 
-  const ProductTile({Key? key, this.data, this.type}) : super(key: key);
+  const ProductTile({Key? key, this.product, this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => ProductScreen(data: data)));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductScreen(data: product)));
       },
       child: Card(
         child: type == 'grid'
@@ -24,7 +24,7 @@ class ProductTile extends StatelessWidget {
                   AspectRatio(
                     aspectRatio: 0.8,
                     child: Image.network(
-                      data?.images![0],
+                      product?.images![0],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -34,11 +34,11 @@ class ProductTile extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            data?.title ?? 'vazio',
+                            product?.title ?? 'vazio',
                             style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "R\$ ${data?.price?.toStringAsFixed(2)}",
+                            "R\$ ${product?.price?.toStringAsFixed(2)}",
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 17.0,
@@ -55,7 +55,7 @@ class ProductTile extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Image.network(
-                      data?.images![0],
+                      product?.images![0],
                       fit: BoxFit.cover,
                       height: 250,
                     ),
@@ -68,11 +68,11 @@ class ProductTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            data?.title ?? 'vazio',
+                            product?.title ?? 'vazio',
                             style: const TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Text(
-                            "R\$ ${data?.price?.toStringAsFixed(2)}",
+                            "R\$ ${product?.price?.toStringAsFixed(2)}",
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 17.0,

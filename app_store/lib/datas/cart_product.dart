@@ -11,6 +11,8 @@ class CartProduct {
 
   ProductData? productData;
 
+  CartProduct();
+
   CartProduct.fromDoc(DocumentSnapshot document) {
     cid = document.id;
     category = document.get('category');
