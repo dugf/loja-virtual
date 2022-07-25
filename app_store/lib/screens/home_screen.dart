@@ -1,4 +1,5 @@
 import 'package:app_store/tabs/home_tab.dart';
+import 'package:app_store/tabs/orders_tab.dart';
 import 'package:app_store/tabs/products_tab.dart';
 import 'package:app_store/widgets/cart_buttom.dart';
 import 'package:app_store/widgets/custom_drawer.dart';
@@ -32,7 +33,15 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: const CartButton(),
         ),
         Container(color: Colors.red),
-        Container(color: Colors.green),
+        Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
+            title: const Text('Meus Pedidos'),
+            centerTitle: true,
+          ),
+          body: const OrdersTabs(),
+          drawer: CustomDrawer(pageController: _pageController),
+        )
       ],
     );
   }

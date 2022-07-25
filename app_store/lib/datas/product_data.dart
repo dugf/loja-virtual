@@ -12,13 +12,13 @@ class ProductData {
   List? images;
   List? sizes;
 
-  ProductData.fromDocument(DocumentSnapshot snapshot) {
-    id = snapshot.reference.id;
-    title = snapshot.get("title");
-    description = snapshot.get("description");
-    price = snapshot.get("price") + 0.0;
-    images = snapshot.get("images");
-    sizes = snapshot.get("sizes");
+  ProductData.fromDocument(DocumentSnapshot? snapshot) {
+    id = snapshot?.reference.id;
+    title = snapshot?.get("title") ?? '';
+    description = snapshot?.get("description");
+    price = snapshot?.get("price") + 0.0;
+    images = snapshot?.get("images");
+    sizes = snapshot?.get("sizes");
   }
 
   Map<String, dynamic> toResumedMap() {

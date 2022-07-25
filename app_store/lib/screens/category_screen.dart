@@ -51,7 +51,7 @@ class CategoryScreen extends StatelessWidget {
                             childAspectRatio: 0.65),
                     itemCount: snapshot.data?.docs.length,
                     itemBuilder: (context, index) {
-                      ProductData data =
+                      ProductData? data =
                           ProductData.fromDocument(snapshot.data!.docs[index]);
                       data.category = this.snapshot?.id;
 
@@ -62,7 +62,7 @@ class CategoryScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     itemCount: snapshot.data?.docs.length,
                     itemBuilder: (context, index) {
-                      ProductData data =
+                      ProductData? data =
                           ProductData.fromDocument(snapshot.data!.docs[index]);
                       data.category = this.snapshot?.id;
 
