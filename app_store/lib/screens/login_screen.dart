@@ -46,7 +46,9 @@ class _LoginScreenState extends State<LoginScreen> {
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model) {
             if (model.isLoading!) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             } else {
               return Form(
                 key: _formKey,
@@ -117,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: ElevatedButton.styleFrom(primary: primaryColor),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            model.SignIn(
+                            model.signIn(
                                 email: _emailController.text,
                                 pass: _passController.text,
                                 onSuccess: _onSuccess,

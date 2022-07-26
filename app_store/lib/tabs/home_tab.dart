@@ -67,7 +67,7 @@ class HomeTab extends StatelessWidget {
                                   image: snapshot.data!.docs[index]['image'],
                                   fit: BoxFit.cover,
                                 )),
-                            childCount: snapshot.data!.docs.length)),
+                            childCount: snapshot.data?.docs.length)),
                   );
                 }
               },

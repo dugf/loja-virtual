@@ -50,17 +50,17 @@ class CartModel extends Model {
     notifyListeners();
   }
 
-  void decProduct(CartProduct cartProduct) {
-    if (cartProduct.quantity != null) {
-      cartProduct.quantity = cartProduct.quantity! - 1;
+  void decProduct(CartProduct? cartProduct) {
+    if (cartProduct?.quantity != null) {
+      cartProduct?.quantity = cartProduct.quantity! - 1;
     }
 
     FirebaseFirestore.instance
         .collection('users')
         .doc(user.firebaseUser?.user?.uid)
         .collection('cart')
-        .doc(cartProduct.cid)
-        .update(cartProduct.toMap());
+        .doc(cartProduct?.cid)
+        .update(cartProduct!.toMap());
 
     notifyListeners();
   }
@@ -114,8 +114,8 @@ class CartModel extends Model {
     notifyListeners();
 
     double? productsPrice = getProductsPrice();
-    double shipPrice = getShipPrice();
-    double discount = getDiscount();
+    double? shipPrice = getShipPrice();
+    double? discount = getDiscount();
 
     DocumentReference refOrder =
         await FirebaseFirestore.instance.collection('orders').add({

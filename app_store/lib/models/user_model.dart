@@ -7,7 +7,9 @@ import 'package:scoped_model/scoped_model.dart';
 
 class UserModel extends Model {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   UserCredential? firebaseUser;
+
   Map<String, dynamic> userData = {};
 
   bool? isLoading = false;
@@ -47,7 +49,7 @@ class UserModel extends Model {
     });
   }
 
-  Future<void> SignIn(
+  Future<void> signIn(
       {required String email,
       required String pass,
       required VoidCallback onSuccess,
@@ -74,8 +76,10 @@ class UserModel extends Model {
 
   void signOut() async {
     await _auth.signOut();
+
     userData = {};
     firebaseUser = null;
+
     notifyListeners();
   }
 
@@ -96,7 +100,9 @@ class UserModel extends Model {
   }
 
   Future<void> _loadCurrentUser() async {
-    firebaseUser ??= _auth.currentUser! as UserCredential;
+    if (firebaseUser == null) {
+      _auth.currentUser;
+    }
     if (firebaseUser != null) {
       if (userData['name'] == null) {
         DocumentSnapshot docUser = await FirebaseFirestore.instance

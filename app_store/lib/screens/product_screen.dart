@@ -8,21 +8,23 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
-  final ProductData? data;
+  final ProductData? product;
 
-  const ProductScreen({Key? key, this.data}) : super(key: key);
+  const ProductScreen({Key? key, this.product}) : super(key: key);
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState(data);
+  State<ProductScreen> createState() {
+    return _ProductScreenState(product);
+  }
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  final ProductData? data;
+  final ProductData? product;
   String? size;
   int? current = 0;
   final CarouselController _carouselController = CarouselController();
 
-  _ProductScreenState(this.data);
+  _ProductScreenState(this.product);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class _ProductScreenState extends State<ProductScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text(data?.title ?? ''),
+        title: Text(product?.title ?? ''),
         centerTitle: true,
       ),
       body: ListView(
@@ -50,13 +52,13 @@ class _ProductScreenState extends State<ProductScreen> {
                     });
                   },
                 ),
-                items: data?.images?.map((e) {
+                items: product?.images?.map((e) {
                   return Image.network(e, fit: BoxFit.cover);
                 }).toList()),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: data!.images!.asMap().entries.map((entry) {
+            children: product!.images!.asMap().entries.map((entry) {
               return GestureDetector(
                 onTap: () => _carouselController.animateToPage(entry.key),
                 child: Container(
@@ -81,7 +83,7 @@ class _ProductScreenState extends State<ProductScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  data?.title ?? '',
+                  product?.title ?? '',
                   style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.w500,
@@ -89,7 +91,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   maxLines: 3,
                 ),
                 Text(
-                  "R\$ ${data!.price!.toStringAsFixed(2)}",
+                  "R\$ ${product!.price!.toStringAsFixed(2)}",
                   style: TextStyle(
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold,
@@ -115,7 +117,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       mainAxisSpacing: 8.0,
                       childAspectRatio: 0.5,
                     ),
-                    children: data!.sizes!.map((s) {
+                    children: product!.sizes!.map((s) {
                       return GestureDetector(
                         child: Container(
                           decoration: BoxDecoration(
@@ -153,8 +155,9 @@ class _ProductScreenState extends State<ProductScreen> {
 
                               cartProduct.size = size;
                               cartProduct.quantity = 1;
-                              cartProduct.pid = data?.id;
-                              cartProduct.category = data?.category;
+                              cartProduct.pid = product?.id;
+                              cartProduct.category = product?.category;
+                              cartProduct.productData = product;
 
                               CartModel.of(context).addCartItem(cartProduct);
 
@@ -182,7 +185,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  data?.description ?? '',
+                  product?.description ?? '',
                   style: const TextStyle(fontSize: 16),
                 ),
               ],

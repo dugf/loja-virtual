@@ -4,14 +4,13 @@ import 'package:app_store/tiles/order_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class OrdersTabs extends StatelessWidget {
-  const OrdersTabs({Key? key}) : super(key: key);
+class OrdersTab extends StatelessWidget {
+  const OrdersTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (UserModel.of(context).isLoggedIn()!) {
-      String uid = UserModel.of(context).firebaseUser!.user!.uid;
-
+      String? uid = UserModel.of(context).firebaseUser?.user?.uid;
       return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
             .collection('users')
@@ -20,11 +19,15 @@ class OrdersTabs extends StatelessWidget {
             .get(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           } else {
             return ListView(
               children: snapshot.data!.docs
                   .map((doc) => OrderTile(orderId: doc.id))
+                  .toList()
+                  .reversed
                   .toList(),
             );
           }

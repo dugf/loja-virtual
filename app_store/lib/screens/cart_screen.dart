@@ -90,9 +90,10 @@ class CartScreen extends StatelessWidget {
                   const ShipCard(),
                   CartPrice(
                     buy: () async {
+                      final navigator = Navigator.of(context);
                       String? orderId = await model.finishOrder();
                       if (orderId != null) {
-                        Navigator.of(context).pushReplacement(
+                        navigator.pushReplacement(
                           MaterialPageRoute(
                             builder: (context) => OrderScreen(
                               orderId: orderId,
