@@ -33,8 +33,11 @@ class _LoginScreenState extends State<LoginScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const SignUpScreen()));
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const SignUpScreen(),
+                  ),
+                );
               },
               child: const Text(
                 'CRIAR CONTA',
@@ -145,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onSuccess() {
-    Navigator.of(context).pop();
+    Navigator.pop(context);
   }
 
   void _onFail() {

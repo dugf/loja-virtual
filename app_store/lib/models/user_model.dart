@@ -14,6 +14,8 @@ class UserModel extends Model {
 
   bool? isLoading = false;
 
+  bool? admin = false;
+
   static UserModel of(BuildContext context) =>
       ScopedModel.of<UserModel>(context);
 
@@ -79,6 +81,7 @@ class UserModel extends Model {
 
     userData = {};
     firebaseUser = null;
+    admin = false;
 
     notifyListeners();
   }
@@ -111,7 +114,17 @@ class UserModel extends Model {
             .get();
         userData = docUser.data() as Map<String, dynamic>;
       }
+      final docAdmin = await FirebaseFirestore.instance
+          .collection('admins')
+          .doc(firebaseUser?.user?.uid)
+          .get();
+
+      if (docAdmin.exists) {
+        admin = true;
+      }
     }
     notifyListeners();
   }
+
+  bool? get adminEnabled => admin!;
 }

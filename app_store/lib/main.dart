@@ -1,3 +1,4 @@
+import 'package:app_store/models/admin_users_manager.dart';
 import 'package:app_store/models/cart_model.dart';
 import 'package:app_store/models/user_model.dart';
 import 'package:app_store/screens/home_screen.dart';
@@ -20,15 +21,18 @@ class MyApp extends StatelessWidget {
       model: UserModel(),
       child: ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
-          return ScopedModel<CartModel>(
-            model: CartModel(model),
-            child: MaterialApp(
-              title: "Flutter's Clothing",
-              theme: ThemeData(
-                  primarySwatch: Colors.blue,
-                  primaryColor: const Color.fromARGB(255, 4, 125, 141)),
-              debugShowCheckedModeBanner: false,
-              home: const HomeScreen(),
+          return ScopedModel<AdminUsersManager>(
+            model: AdminUsersManager(),
+            child: ScopedModel<CartModel>(
+              model: CartModel(model),
+              child: MaterialApp(
+                title: "Flutter's Clothing",
+                theme: ThemeData(
+                    primarySwatch: Colors.blue,
+                    primaryColor: const Color.fromARGB(255, 4, 125, 141)),
+                debugShowCheckedModeBanner: false,
+                home: const HomeScreen(),
+              ),
             ),
           );
         },

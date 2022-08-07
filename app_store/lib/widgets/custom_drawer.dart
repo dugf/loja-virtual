@@ -72,6 +72,7 @@ class CustomDrawer extends StatelessWidget {
                                             builder: (context) =>
                                                 const LoginScreen()));
                                   } else {
+                                    pageController?.jumpToPage(0);
                                     model.signOut();
                                   }
                                 },
@@ -105,6 +106,31 @@ class CustomDrawer extends StatelessWidget {
                   text: "Meus Pedidos",
                   controller: pageController,
                   page: 3),
+              ScopedModelDescendant<UserModel>(builder: (_, __, userModel) {
+                if (userModel != null) {
+                  if (userModel.adminEnabled!) {
+                    return Column(
+                      children: [
+                        const Divider(),
+                        DrawerTile(
+                            iconData: Icons.settings,
+                            text: "Usuários",
+                            controller: pageController,
+                            page: 4),
+                        DrawerTile(
+                            iconData: Icons.settings,
+                            text: "Pedidos",
+                            controller: pageController,
+                            page: 5),
+                      ],
+                    );
+                  } else {
+                    return Container();
+                  }
+                } else {
+                  return Container();
+                }
+              }),
             ],
           )
         ],

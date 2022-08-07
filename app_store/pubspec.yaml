@@ -47,6 +47,8 @@ dependencies:
   url_launcher: ^6.1.5
   firebase_core: ^1.19.2
   flutter_launcher_icons: ^0.9.3
+  faker: ^2.0.0
+  alphabet_scroll_view: ^0.3.1
   
 dev_dependencies:
   flutter_test:
